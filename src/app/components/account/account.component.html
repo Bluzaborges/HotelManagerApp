@@ -1,0 +1,65 @@
+<app-breadcrumb></app-breadcrumb>
+
+<div class="container">
+
+    <mat-card class="card">
+
+        <mat-card-content>
+            
+            <form [formGroup]="form" *ngIf="form">
+            
+                <div class="form-div">
+
+                    <div class="fields-div">
+
+                        <h1 class="card-title">Alterar conta</h1>
+                        
+                        <mat-form-field class="form-field" appearance="outline">
+                            <mat-label>Nome</mat-label>
+                            <input type="text" matInput formControlName="name">
+                            @if (form.get('name')?.errors?.['required']){
+                                <mat-error>Nome é <strong>obrigatório</strong></mat-error>
+                            }
+                        </mat-form-field>
+    
+                        <mat-form-field class="form-field" appearance="outline">
+                            <mat-label>CPF</mat-label>
+                            <input type="text" matInput formControlName="cpf" maxlength="14" mask="CPF_CNPJ">
+                            @if (form.get('cpf')?.errors?.['required']){
+                                <mat-error>CPF é <strong>obrigatório</strong></mat-error>
+                            }
+                        </mat-form-field>
+    
+                        <mat-form-field class="form-field" appearance="outline">
+                            <mat-label>E-mail</mat-label>
+                            <input type="email" matInput formControlName="email" placeholder="Ex: exemplo@gmail.com">
+                            @if (form.get('email')?.errors?.['email'] && !form.get('email')?.errors?.['required']) {
+                                <mat-error>Insira um e-mail válido</mat-error>
+                            }
+                            @if (form.get('email')?.errors?.['required']) {
+                                <mat-error>E-mail é <strong>obrigatório</strong></mat-error>
+                            }
+                        </mat-form-field>
+    
+                        <mat-form-field class="form-field" appearance="outline">
+                            <mat-label>Telefone</mat-label>
+                            <input type="text" matInput formControlName="phone" mask="(00) 00000-0000">
+                            @if (form.get('phone')?.errors?.['required']){
+                                <mat-error>Telefone é <strong>obrigatório</strong></mat-error>
+                            }
+                        </mat-form-field>
+
+                        <button [disabled]="form.invalid" mat-flat-button color="primary" class="form-button" (click)="onSubmit()">Salvar</button>
+                        <button mat-flat-button class="form-button" (click)="onPreviousPage()">Voltar</button>
+                    
+                    </div>
+
+                </div>
+            
+            </form>
+
+        </mat-card-content>
+
+    </mat-card>
+
+</div>

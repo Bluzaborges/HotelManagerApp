@@ -1,0 +1,47 @@
+<mat-grid-list [cols]="breakpoint" rowHeight="100%" (window:resize)="onResize($event)">
+
+    <mat-grid-tile class="grid-container">
+        <img class="grid-image" src="../assets/banner/banner_960_1080.png"/>
+    </mat-grid-tile>
+
+    <mat-grid-tile class="grid-container">
+
+        <div class="container">
+
+            <form [formGroup]="form">
+
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>E-mail</mat-label>
+                    <input type="email" matInput formControlName="email" placeholder="Ex: exemplo@gmail.com">
+                    @if (form.get('email')?.errors?.['email'] && !form.get('email')?.errors?.['required']) {
+                        <mat-error>Insira um e-mail válido</mat-error>
+                    }
+                    @if (form.get('email')?.errors?.['required']) {
+                        <mat-error>E-mail é <strong>obrigatório</strong></mat-error>
+                    }
+                </mat-form-field>
+        
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Senha</mat-label>
+                    <input [type]="hidePassword ? 'password' : 'text'" matInput formControlName="password" autocomplete="on">
+                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+                        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    @if (form.get('password')?.errors?.['required']) {
+                        <mat-error>Senha é <strong>obrigatório</strong></mat-error>
+                    }
+                </mat-form-field>
+        
+                <button [disabled]="form.invalid" mat-fab extended color="primary" class="form-button custom-button" (click)="onSubmit()">Login</button>
+        
+                <mat-divider></mat-divider>
+        
+                <div class="signup-text">Ainda não tem uma conta? <a id="register" routerLink="/signup">Cadastre-se</a></div>
+        
+            </form>
+        
+        </div>
+        
+    </mat-grid-tile>
+    
+</mat-grid-list>

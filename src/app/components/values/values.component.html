@@ -1,0 +1,32 @@
+<app-breadcrumb></app-breadcrumb>
+
+<mat-grid-list [cols]="breakpoint" rowHeight="275px" (window:resize)="onResize($event)">
+
+    <mat-grid-tile *ngFor="let roomValue of roomValues">
+
+        <mat-card class="card" layout="column" layout-fill>
+
+            <mat-card-content class="card-content">
+
+                <div class="card-title">
+                    {{roomValue.name}}
+                </div>
+
+                <div class="card-subtitle">
+                    <span>R$ {{ roomValue.value | number:'1.2-2' }} / dia</span>
+                </div>
+
+                <div class="card-data">
+                    <span *ngIf="roomValue.roomsCount > 0">{{roomValue.roomsCount}} quarto(s)</span>
+                    <span *ngIf="roomValue.roomsCount == 0">Nenhum quarto</span>
+                </div>
+
+                <button class="card-button" mat-stroked-button color="primary" (click)="onEditRoomValue(roomValue.id)">Alterar</button>
+
+            </mat-card-content>
+
+        </mat-card>
+
+    </mat-grid-tile>
+
+</mat-grid-list>

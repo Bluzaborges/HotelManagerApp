@@ -1,0 +1,91 @@
+<div class="container">
+
+    <mat-sidenav-container class="sidenav-container">
+
+        <mat-toolbar class="toolbar">
+        
+            <mat-toolbar-row class="toolbar-row">
+    
+                <img *ngIf="showLogo()" ngSrc="../assets/header/logo_700_200.png" priority width="105" height="30">
+    
+                <span class="span-spacer"></span>
+    
+                <span class="user-firstname">Olá, {{userName.split(" ")[0]}}!</span>
+    
+                <button mat-button class="menu-button" [matMenuTriggerFor]="afterMenu">
+    
+                    <span class="menu-icon">{{userName.charAt(0)}}</span>
+    
+                    <mat-menu class="custom-menu" #afterMenu="matMenu" yPosition="below">
+    
+                        <div class="user-profile">
+                            <button mat-button class="menu-internal-button">
+                                <span class="menu-icon">{{userName.charAt(0)}}</span>
+                            </button>
+                            <div class="user-details">
+                                <div class="user-info">
+                                    <div class="user-name">{{userName}}</div>
+                                    <div *ngIf="showRole()" [ngClass]="{'info-badge-accent': isAdmin(), 'info-badge-primary': !isAdmin()}">{{userRole | role}}</div>
+                                </div>                   
+                                <a class="user-email">{{userEmail}}</a>
+                            </div>
+                        </div>
+    
+                        <mat-divider class="user-divider"></mat-divider>
+    
+                        <div class="menu-options">
+                            <button mat-button class="menu-option" (click)="onAccount()">Minha conta</button>
+                            <button mat-button class="menu-option" (click)="onAccountPassword()">Alterar senha</button>
+                            <button mat-button class="menu-option" (click)="onSignOut()">Sair</button>
+                        </div>
+    
+                    </mat-menu>
+    
+                </button>
+    
+            </mat-toolbar-row>
+            
+        </mat-toolbar>
+        
+        <mat-sidenav class="custom-sidenav" *ngIf="showSidenav()" [style.width.px]="sidenavOpened ? 200 : 80" #sidenav mode="side" opened="true" (window:resize)="onResize($event)">
+        
+            <div style="margin-left: 25px; margin-top: 25px; width: 90px; height: 30px;">
+                <img ngSrc="assets/header/logo_700_200.png" priority width="105" height="30" *ngIf="sidenavOpened" >
+                <img ngSrc="assets/header/logo_110_200.png" priority width="16.5" height="30" *ngIf="!sidenavOpened" >
+            </div>
+        
+            <mat-list class="sidenav-list">
+                <mat-list-item>
+                    <button class="sidenav-list-button" mat-button [class.button-active]="activeCustomers()" [class.sidenav-list-button-closed]="!sidenavOpened" (click)="onCustomers()">
+                        
+                        <mat-icon svgIcon="users-icon" class="sidenav-list-button-icon" [class.icon-active]="activeCustomers()"></mat-icon>
+                        <span *ngIf="sidenavOpened">Clientes</span>
+                    </button>
+                </mat-list-item>
+                <mat-list-item>
+                    <button class="sidenav-list-button" mat-button [class.button-active]="activeEmployees()" [class.sidenav-list-button-closed]="!sidenavOpened" (click)="onEmployees()">
+                        <mat-icon svgIcon="badge-icon" class="sidenav-list-button-icon" [class.icon-active]="activeEmployees()"></mat-icon>
+                        <span *ngIf="sidenavOpened">Colaboradores</span>
+                    </button>
+                </mat-list-item>
+                <mat-list-item>
+                    <button class="sidenav-list-button" mat-button [class.button-active]="activeRooms()" [class.sidenav-list-button-closed]="!sidenavOpened" (click)="onRooms()">
+                        <mat-icon svgIcon="home-icon" class="sidenav-list-button-icon" [class.icon-active]="activeRooms()"></mat-icon>
+                        <span *ngIf="sidenavOpened">Quartos</span>
+                    </button>
+                </mat-list-item>
+                <mat-list-item>
+                    <button class="sidenav-list-button" mat-button [class.button-active]="activeValues()" [class.sidenav-list-button-closed]="!sidenavOpened" (click)="onValues()">
+                        <mat-icon class="material-icons-outlined sidenav-list-button-icon" [class.icon-active]="activeValues()">sell</mat-icon>
+                        <span *ngIf="sidenavOpened">Valores</span>
+                    </button>
+                </mat-list-item>
+            </mat-list>
+        
+        </mat-sidenav>
+        
+        <router-outlet></router-outlet>
+
+    </mat-sidenav-container>
+
+</div>

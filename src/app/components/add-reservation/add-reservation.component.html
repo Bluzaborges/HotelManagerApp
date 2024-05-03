@@ -1,0 +1,64 @@
+<app-breadcrumb></app-breadcrumb>
+
+<div class="container">
+
+    <mat-card class="card">
+
+        <mat-card-content>
+            
+            <form [formGroup]="form">
+            
+                <div class="form-div">
+
+                    <div class="fields-div">
+
+                        <h1 class="card-title">{{this.currentPathSubtitle}}</h1>
+
+                        <mat-form-field class="form-field" color="accent" appearance="outline">
+                            <mat-label>Data de início</mat-label>
+                            <input matInput [matDatepicker]="startDate" [min]="getMinimumStartDate()" [max]="getMaximumStartDate()" formControlName="startDate">
+                            @if (form.get('startDate')?.errors?.['required']){
+                                <mat-error>Data de início é <strong>obrigatório</strong></mat-error>
+                            }
+                            <mat-datepicker-toggle matIconSuffix [for]="startDate"></mat-datepicker-toggle>
+                            <mat-datepicker #startDate color="primary"></mat-datepicker>
+                        </mat-form-field>
+
+                        <mat-form-field class="form-field" color="accent" appearance="outline">
+                            <mat-label>Data final</mat-label>
+                            <input matInput [matDatepicker]="endDate" [min]="getMinimumEndDate()" [max]="getMaximumEndDate()" formControlName="endDate">
+                            @if (form.get('endDate')?.errors?.['required']){
+                                <mat-error>Data final é <strong>obrigatória</strong></mat-error>
+                            }
+                            <mat-datepicker-toggle matIconSuffix [for]="endDate"></mat-datepicker-toggle>
+                            <mat-datepicker #endDate color="primary"></mat-datepicker>
+                        </mat-form-field>
+
+                        <h2 class="title-selection">Tipo de quarto</h2>
+
+                        <mat-grid-list class="grid-selection" [cols]="breakpoint" rowHeight="250px" (window:resize)="onResize($event)" gutterSize="25px">
+                            <mat-radio-group class="radio-group" formControlName="type">
+                                <mat-grid-tile *ngFor="let roomValue of roomValues">
+                                    <mat-card class="card-selection" [ngClass]="{'selected': isCardSelected(roomValue.type)}" (click)="selectRadio(roomValue.type)">
+                                        <mat-radio-button [value]="roomValue.type"></mat-radio-button>
+                                        <h1 class="card-selection-title">{{roomValue.name}}</h1>
+                                        <div class="card-selection-subtitle">R$ {{roomValue.value | number:'1.2-2'}} / dia</div>
+                                    </mat-card>
+                                </mat-grid-tile>
+                            </mat-radio-group>
+                        </mat-grid-list>
+
+                        <button [disabled]="form.invalid" mat-flat-button color="primary" class="form-button" (click)="onSubmit()">Salvar</button>
+                        <button mat-flat-button class="form-button" (click)="onPreviousPage()">Voltar</button>
+                        
+                    </div>
+
+                </div>
+
+            </form>
+
+        </mat-card-content>
+    
+    </mat-card>
+
+</div>

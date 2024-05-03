@@ -1,0 +1,63 @@
+<app-breadcrumb></app-breadcrumb>
+
+<mat-grid-list [cols]="breakpoint" rowHeight="475px" (window:resize)="onResize($event)">
+
+  <mat-grid-tile *ngFor="let reservation of reservations">
+
+    <mat-card class="card">
+
+      <mat-card-content class="card-content">
+
+        <div class="card-title">
+          <div class="room-code">
+            Quarto {{reservation.room.code}}
+          </div>
+          <div class="status" *ngIf="inProgress(reservation.startDate)">Em andamento</div>
+          <div class="status" *ngIf="!inProgress(reservation.startDate)">Em espera</div>
+        </div>
+
+        <div class="card-subtitle">
+          <span>{{reservation.room.roomValue.name}}</span>
+        </div>
+
+        <div class="card-data">
+          <span>Início:</span>
+          <span class="card-info">
+            {{reservation.startDate | date: 'dd/MM/yyyy'}} às {{reservation.startDate | date: 'hh:mm'}}
+          </span>
+        </div>
+
+        <div class="card-data">
+          <span>Término:</span>
+          <span class="card-info">
+            {{reservation.endDate | date: 'dd/MM/yyyy'}}  às {{reservation.endDate | date: 'hh:mm'}}
+          </span>
+        </div>
+
+        <div class="card-data">
+          <span>Valor:</span>
+          <span class="card-info">
+            R$ {{ reservation.value | number:'1.2-2' }}
+          </span>
+        </div>
+      
+        <button class="card-button" mat-stroked-button color="warn" (click)="onCancelReservation(reservation.startDate, reservation.id)" [disabled]="inProgress(reservation.startDate) == true">Cancelar</button>
+        <button class="card-button" mat-stroked-button color="primary" (click)="onEditReservation(reservation.id)" [disabled]="inProgress(reservation.startDate) == true">Alterar</button>
+
+      </mat-card-content>
+
+    </mat-card>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <a (click)="onRegisterReservation()">
+      <mat-card class="custom-card">
+        <mat-card-content class="custom-card-content">
+          <div class="custom-card-title">Fazer nova reserva</div>
+        </mat-card-content>
+      </mat-card>
+    </a>
+  </mat-grid-tile>
+
+</mat-grid-list>

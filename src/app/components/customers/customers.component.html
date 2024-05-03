@@ -1,0 +1,82 @@
+<app-breadcrumb></app-breadcrumb>
+
+<div class="container">
+    
+    <mat-card class="card">
+
+        <mat-card-content>
+
+            <mat-form-field class="search-field" appearance="outline">
+                <mat-label>Pesquisar...</mat-label>
+                <input matInput (keyup)="applyFilter($event)" #input>
+            </mat-form-field>
+            
+            <table class="user-table" mat-table [dataSource]="dataSource" matSort>
+              
+                <ng-container matColumnDef="name">
+                  <th class="column-title" mat-header-cell *matHeaderCellDef mat-sort-header> NOME </th>
+                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="cpf">
+                  <th class="column-title" mat-header-cell *matHeaderCellDef> CPF </th>
+                  <td mat-cell *matCellDef="let element"> {{element.cpf | cpf}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                  <th class="column-title" mat-header-cell *matHeaderCellDef mat-sort-header> E-MAIL </th>
+                  <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="phone">
+                  <th class="column-title" mat-header-cell *matHeaderCellDef> TELEFONE </th>
+                  <td mat-cell *matCellDef="let element"> {{element.phone | phone}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fine">
+                    <th class="column-title" mat-header-cell *matHeaderCellDef mat-sort-header> MULTAS PENDENTES </th>
+                    <td mat-cell *matCellDef="let element"> R$ {{element.fine | number:'1.2-2'}} </td>
+                  </ng-container>
+
+                <ng-container matColumnDef="blocked">
+                    <th class="column-title" mat-header-cell *matHeaderCellDef mat-sort-header> BLOQUEADO </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <div *ngIf="!element.blocked" class="info-badge-primary">Não</div>
+                        <div *ngIf="element.blocked" class="info-badge-warn">Sim</div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <th class="column-title" mat-header-cell *matHeaderCellDef> AÇÕES </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button color="warn" (click)="onBlockUser(element.id)" *ngIf="element.blocked == false" matTooltip="Bloquear" matTooltipPosition="before">
+                            <mat-icon>block</mat-icon>
+                        </button>
+                        <button mat-icon-button color="primary" (click)="onUnblockUser(element.id)"  *ngIf="element.blocked == true" matTooltip="Desbloquear" matTooltipPosition="before">
+                            <mat-icon>lock_open</mat-icon>
+                        </button>
+                        <button mat-icon-button color="primary" (click)="onRemoveFine(element.id)"  *ngIf="element.fine > 0" matTooltip="Zerar multa" matTooltipPosition="after">
+                            <mat-icon>credit_score</mat-icon>
+                        </button>
+                        <button *ngIf="isAdmin()" mat-icon-button color="warn" (click)="onDeleteUser(element.id)"  matTooltip="Excluir" matTooltipPosition="after">
+                            <mat-icon svgIcon="trash-icon"></mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+              
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="7">Não foram encontrados clientes</td>
+                </tr>
+
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+        </mat-card-content>
+
+    </mat-card>
+
+</div>

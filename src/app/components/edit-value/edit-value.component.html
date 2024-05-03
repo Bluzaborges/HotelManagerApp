@@ -1,0 +1,46 @@
+<app-breadcrumb></app-breadcrumb>
+
+<div class="container">
+
+    <mat-card class="card">
+
+        <mat-card-content>
+            
+            <form [formGroup]="form" *ngIf="form">
+            
+                <div class="form-div">
+
+                    <div class="fields-div">
+
+                        <h1 class="card-title">Alterar valor</h1>
+                        
+                        <mat-form-field class="form-field" appearance="outline">
+                            <mat-label>Nome</mat-label>
+                            <input type="text" matInput formControlName="name">
+                            @if (form.get('name')?.errors?.['required']){
+                                <mat-error>Nome é <strong>obrigatório</strong></mat-error>
+                            }
+                        </mat-form-field>
+
+                        <mat-form-field class="form-field" appearance="outline">
+                            <mat-label>Valor</mat-label>
+                            <input type="text" matInput formControlName="value" prefix="R$ " mask="separator.2" thousandSeparator="." decimalMarker="," placeholder="R$ 0,00" [dropSpecialCharacters]="false">
+                            @if (form.get('value')?.errors?.['required']){
+                                <mat-error>Valor é <strong>obrigatório</strong></mat-error>
+                            }
+                        </mat-form-field>
+
+                        <button [disabled]="form.invalid" mat-flat-button color="primary" class="form-button" (click)="onSubmit()">Salvar</button>
+                        <button mat-flat-button class="form-button" (click)="onPreviousPage()">Voltar</button>
+                    
+                    </div>
+
+                </div>
+            
+            </form>
+
+        </mat-card-content>
+
+    </mat-card>
+
+</div>

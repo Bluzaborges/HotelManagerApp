@@ -1,0 +1,18 @@
+<h2 class="title" mat-dialog-title>Confirmar cancelamento?</h2>
+
+<mat-dialog-content>
+    <p class="message">
+      O cancelamento com 
+      <span style="color: #3F51B5;">menos de 24 horas de antecedência</span> 
+      ocasionará a cobrança de uma 
+      <span style="color: #3F51B5;">multa equivalente a 20% do valor da reserva</span>.
+    </p>
+    <p class="message">Cancelar mesmo assim?</p>
+</mat-dialog-content>
+  
+<div class="footer">
+  <mat-dialog-actions>
+    <button class="button" mat-button mat-dialog-close cdkFocusInitial color="primary" (click)="onNoClick()">Não</button>
+    <button class="button" mat-button mat-dialog-close (click)="onYesClick()">Sim</button>
+  </mat-dialog-actions>
+</div>

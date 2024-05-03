@@ -1,0 +1,51 @@
+.grid-container {
+    height: 100%;
+}
+
+.grid-image {
+    object-fit: cover;
+    height: inherit;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.form-field {
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.form-button {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.signup-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-height: 10vh;
+    font-size: medium;
+}
+
+.signup-text a {
+    display: inline;
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+    transition: color 0.3s;
+    margin-left: 5px;
+}
+
+.signup-text a:hover {
+    cursor: pointer;
+    color: #3F51B5;
+    text-decoration: none;
+}

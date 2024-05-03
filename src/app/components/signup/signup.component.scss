@@ -1,0 +1,28 @@
+.grid-container {
+    height: 100%;
+}
+
+.grid-image {
+    object-fit: cover;
+    height: inherit;
+    width: 100%;
+}
+
+.form-stepper {
+    width: 70%;
+    background-color: ghostwhite;
+}
+
+.form-field {
+    width: 100%;
+    margin-top: 12px;
+    margin-bottom: 8px;
+}
+
+.form-input-hint {
+    color: red;
+}
+
+.form-button {
+    width: 100%;
+}

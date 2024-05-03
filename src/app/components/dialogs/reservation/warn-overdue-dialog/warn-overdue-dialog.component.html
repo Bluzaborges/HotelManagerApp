@@ -1,0 +1,17 @@
+<h2 class="title" mat-dialog-title>Atenção</h2>
+
+<mat-dialog-content>
+
+  <p class="message">Você tem uma
+    <span style="color: #F44336;">multa pendente de R$ {{fine | number:'1.2-2'}}</span>.
+  </p>
+  <p class="message">Para continuar utilizando nossa rede de hotéis, você deverá realizar o pagamento da multa.</p>
+  <p class="message">Para mais informações, entre em contato conosco.</p>
+   
+</mat-dialog-content>
+  
+<div style="padding-bottom: 15px; padding-right: 20px;">
+  <mat-dialog-actions style="float: right;">
+    <button mat-button mat-dialog-close cdkFocusInitial style="border-radius: 20px;" color="primary">Entendido</button>
+  </mat-dialog-actions>
+</div>
