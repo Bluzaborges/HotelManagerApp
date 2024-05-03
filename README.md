@@ -1,2 +1,10 @@
 # HotelManagerApp
-HotelManager front-end.
+
+The technologies used include:
+
+* Angular
+* Angular Material
+* Typescript
+* SCSS
+* Gulp
+* Npm
